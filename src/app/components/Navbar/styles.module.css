@@ -1,0 +1,26 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.navbar div,
+.navbar ul {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.navbar span {
+  display: flex;
+  gap: 6px;
+}
+
+.divider {
+  width: 2px;
+  height: 40px;
+  border-radius: 2px;
+  background-color: #353945;
+}
