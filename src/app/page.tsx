@@ -1,4 +1,5 @@
 import Auction from "./components/Auction/Auction"
+import NftsList from "./components/NftsList/NftsList"
 import styles from "./page.module.css"
 
 // Get Nfts function
@@ -41,16 +42,7 @@ export default async function Home() {
     <main className={styles.main}>
       <Auction nfts={popularNfts} ethPrice={Number(prices.usd.replace(",", ""))} />
 
-      <section className="nfts-container">
-        {allNfts.map((item) => (
-          <article key={item.id}>
-            <img src={item.media.image} alt="imagen nft" />
-            <h2>{item.author}</h2>
-            <p>Stock: {item.stock}</p>
-            <p>Price: {item.instantPrice}</p>
-          </article>
-        ))}
-      </section>
+      <NftsList nfts={allNfts} />
     </main>
   )
 }

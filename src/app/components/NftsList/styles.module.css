@@ -1,0 +1,59 @@
+.filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 48px;
+}
+
+@media (max-width: 560px) {
+  .filterbar {
+    margin-bottom: 1rem;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+}
+
+.btns_container {
+  display: flex;
+  gap: 12px;
+}
+
+.btns_container > button {
+  display: flex;
+  padding: 6px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  color: var(--Neutrals-4);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+.btns_container button.active {
+  color: var(--Neutrals-2);
+  border-radius: 100px;
+  background: var(--Neutrals-6);
+}
+
+.filterbar select {
+  display: flex;
+  width: 256px;
+  padding: 8px 8px 8px 16px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 2px solid var(--Neutrals-3);
+  background-color: var(--Neutrals-1);
+  color: var(--Neutrals-8);
+  font-family: var(--font-poppins);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
