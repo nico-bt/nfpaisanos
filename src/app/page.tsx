@@ -1,7 +1,10 @@
+import Auction from "./components/Auction/Auction"
 import styles from "./page.module.css"
 
-const getPopularNfts = async (): Promise<NFPAISANO[]> => {
-  const res = await fetch(`${process.env.BASE_URL}/nfpaisanos/aunctions`, {
+// Get Nfts function
+// ----------------------------------------------------------------------------
+const getNfts = async (category: string): Promise<NFPAISANO[]> => {
+  const res = await fetch(`${process.env.BASE_URL}/nfpaisanos/${category}`, {
     headers: {
       apiKey: process.env.API_KEY as string,
     },
@@ -14,13 +17,32 @@ const getPopularNfts = async (): Promise<NFPAISANO[]> => {
   return res.json()
 }
 
+// Get Eth dollar price function
+// ----------------------------------------------------------------------------
+const getEthPrice = async (): Promise<{ eth: string; usd: string }> => {
+  const res = await fetch(`${process.env.BASE_URL}/nfpaisanos/eth-price`, {
+    method: "GET",
+    // mode: "no-cors",
+    headers: {
+      apiKey: process.env.API_KEY as string,
+    },
+  })
+  return res.json()
+}
+
+// Home Page
+// ----------------------------------------------------------------------------
 export default async function Home() {
-  const popularNfts = await getPopularNfts()
+  const popularNfts = await getNfts("popular")
+  const allNfts = await getNfts("aunctions")
+  const prices = await getEthPrice()
 
   return (
     <main className={styles.main}>
+      <Auction nfts={popularNfts} ethPrice={Number(prices.usd.replace(",", ""))} />
+
       <section className="nfts-container">
-        {popularNfts.map((item) => (
+        {allNfts.map((item) => (
           <article key={item.id}>
             <img src={item.media.image} alt="imagen nft" />
             <h2>{item.author}</h2>
