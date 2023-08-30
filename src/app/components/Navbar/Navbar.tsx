@@ -1,4 +1,3 @@
-import { symbolName } from "typescript"
 import Logo from "./Logo"
 import styles from "./styles.module.css"
 
