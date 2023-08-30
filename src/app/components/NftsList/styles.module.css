@@ -3,14 +3,18 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
   min-height: 48px;
+  margin-bottom: 1.25rem;
 }
 
 @media (max-width: 560px) {
   .filterbar {
     margin-bottom: 1rem;
+    display: grid;
     justify-content: center;
-    gap: 0.6rem;
+    justify-items: center;
+    gap: 1rem;
   }
 }
 
@@ -42,7 +46,7 @@
 
 .filterbar select {
   display: flex;
-  width: 256px;
+  width: 220px;
   padding: 8px 8px 8px 16px;
   justify-content: space-between;
   align-items: center;
@@ -56,4 +60,5 @@
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
+  text-transform: capitalize;
 }
