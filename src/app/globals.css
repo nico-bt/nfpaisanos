@@ -1,3 +1,21 @@
+:root {
+  --font-poppins: var(--font-poppins);
+  --Neutrals-1: #141416;
+  --Neutrals-2: #23262f;
+  --Neutrals-3: #353945;
+  --Neutrals-4: #777e90;
+  --Neutrals-5: #b1b5c3;
+  --Neutrals-6: #e6e8ec;
+  --Neutrals-7: #f4f5f6;
+  --Neutrals-8: #fcfcfd;
+  --Primary-1: #3772ff;
+  --Primary-2: #9757d7;
+  --Primary-3: #ef466f;
+  --Primary-4: #45b26b;
+  --Secondary-2: #e4d7cf;
+  --Secondary-4: #cdb4db;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -12,7 +30,7 @@ body {
 
 body {
   color: whitesmoke;
-  background: #242424;
+  background: var(--Neutrals-1);
 }
 a {
   color: inherit;
@@ -25,11 +43,36 @@ a {
   gap: 1rem;
 }
 img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
   background-color: black;
 }
 
 li {
   list-style: none;
+}
+.avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+  border: none;
+  border-radius: 90px;
+  background: var(--Primary-1);
+  color: var(--Neutrals-8);
+  font-size: 16px;
+  padding: 12px 16px;
+  cursor: pointer;
+}
+.secondary {
+  border: 2px solid var(--Neutrals-3);
+  background: none;
 }

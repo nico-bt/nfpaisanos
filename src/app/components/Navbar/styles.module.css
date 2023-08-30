@@ -18,9 +18,16 @@
   gap: 6px;
 }
 
+.navbar h1 {
+  color: var(--Neutrals-7);
+}
+.navbar ul {
+  color: var(--Neutrals-4);
+}
+
 .divider {
   width: 2px;
   height: 40px;
   border-radius: 2px;
-  background-color: #353945;
+  background-color: var(--Neutrals-3);
 }
