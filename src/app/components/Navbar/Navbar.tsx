@@ -1,3 +1,4 @@
+import Link from "next/link"
 import Logo from "./Logo"
 import styles from "./styles.module.css"
 
@@ -6,8 +7,10 @@ export default function Navbar() {
     <nav className={styles.navbar}>
       <div>
         <span>
-          <Logo />
-          <h1>NFPaisanos</h1>
+          <Link href="/">
+            <Logo />
+            <h1>NFPaisanos</h1>
+          </Link>
         </span>
         <span className={styles.divider}></span>
         <ul>
