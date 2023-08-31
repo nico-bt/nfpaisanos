@@ -18,7 +18,7 @@ export default function Navbar() {
           <li>What we do</li>
         </ul>
       </div>
-      <div>Connect Wallet</div>
+      <button className="btn secondary">Connect Wallet</button>
     </nav>
   )
 }
