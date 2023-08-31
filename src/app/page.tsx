@@ -1,6 +1,5 @@
 import Auction from "./components/Auction/Auction"
 import NftsList from "./components/NftsList/NftsList"
-import styles from "./page.module.css"
 
 // Get Nfts function
 // ----------------------------------------------------------------------------
@@ -39,10 +38,10 @@ export default async function Home() {
   const prices = await getEthPrice()
 
   return (
-    <main className={styles.main}>
+    <>
       <Auction nfts={popularNfts} ethPrice={Number(prices.usd.replace(",", ""))} />
 
       <NftsList nfts={allNfts} />
-    </main>
+    </>
   )
 }

@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${dm_sans.className} ${poppins.variable} `}>
         <Navbar />
-        {children}
+        <main className="main">{children}</main>
       </body>
     </html>
   )
