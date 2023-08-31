@@ -1,3 +1,7 @@
+import Link from "next/link"
+import arrowBack from "./arrow_back.svg"
+import Image from "next/image"
+
 const getNftById = async (id: string): Promise<NFPAISANO> => {
   const res = await fetch(`${process.env.BASE_URL}/nfpaisanos/aunctions`, {
     headers: {
@@ -24,14 +28,29 @@ export default async function page({ params }: { params: { id: string } }) {
       >
         <img src={nft.media.image} alt="imagen nft" style={{ maxHeight: "90vh" }} />
 
-        <div>
-          <h2>{nft.author}</h2>
+        <div style={{ display: "grid", gap: 6 }}>
+          <img
+            src={nft.authorAvatar}
+            alt="author avatar"
+            className="avatar"
+            style={{ height: 60, width: 60, marginInline: "auto" }}
+          />
+          <h2 style={{ textAlign: "center" }}>{nft.author}</h2>
           <p>Stock: {nft.stock}</p>
           <p>Price: {nft.instantPrice}</p>
-          <p>Likes: {nft.likes}</p>
-          <p>Author: {nft.author}</p>
+          <p>Likes: {nft.likes} ❤️ </p>
           <p>Created at: {new Date(nft.createdAt).toDateString()}</p>
           <p>Type: {nft.type}</p>
+
+          <Link href="/" style={{ justifySelf: "flex-end", marginTop: 40 }}>
+            <Image
+              style={{ fill: "whitesmoke", background: "none" }}
+              src={arrowBack}
+              height={24}
+              width={24}
+              alt="back arrrow"
+            />
+          </Link>
         </div>
       </article>
     </div>
