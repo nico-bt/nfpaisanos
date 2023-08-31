@@ -1,5 +1,4 @@
 "use client"
-import { poppins } from "@/app/layout"
 import styles from "./styles.module.css"
 import { useEffect, useState } from "react"
 
@@ -50,7 +49,7 @@ export default function Countdown({ finalDate }: { finalDate: Date }) {
           <span>mins</span>
         </div>
         <div>
-          <p>{seconds}</p>
+          <p suppressHydrationWarning>{seconds}</p>
           <span>secs</span>
         </div>
       </div>
