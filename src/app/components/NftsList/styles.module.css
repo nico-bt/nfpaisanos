@@ -62,3 +62,136 @@
   line-height: 24px;
   text-transform: capitalize;
 }
+.filterbar label {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--Neutrals-5);
+}
+
+.nfts_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+  gap: 1rem;
+}
+
+/* CARD */
+/***************************************************************/
+.card {
+  padding: 12px;
+  border-radius: 20px;
+  background: var(--Neutrals-2);
+  box-shadow: 0px 64px 64px -48px rgba(31, 47, 70, 0.12);
+  font-family: var(--font-poppins);
+  transition: all 0.3s ease;
+}
+
+.card img {
+  border-radius: 12px;
+}
+.card_img_container {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.card_img_container img,
+.card_img_container div {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.img_overlay {
+  opacity: 0;
+  display: grid;
+  align-content: space-between;
+  height: 100%;
+  padding: 1rem;
+}
+.img_overlay:hover {
+  opacity: 1;
+}
+.img_overlay p {
+  display: flex;
+  justify-content: space-between;
+}
+.img_overlay .type {
+  color: var(--Neutrals-8);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 12px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  background: var(--Primary-4);
+  padding: 8px 8px 6px 8px;
+}
+
+.img_overlay .heart {
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+.card a {
+  font-size: 14px;
+}
+
+.card_body,
+.card_footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: space-between;
+  gap: 12px;
+}
+.card_body {
+  margin: 20px 0 12px 0;
+}
+
+.card_body div,
+.card_footer div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card h2 {
+  color: var(--Neutrals-8);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+.card_price {
+  display: flex;
+  padding: 8px 8px 6px 8px;
+  justify-content: center;
+  align-items: center;
+  min-width: 78px;
+  border-radius: 4px;
+  border: 2px solid var(--Primary-4);
+  color: var(--Primary-4);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 12px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.card_stock {
+  font-size: 12px;
+}
+.card_small_content {
+  font-size: 12px;
+  color: var(--Neutrals-4);
+}
+.card_likes {
+  display: flex;
+  gap: 6px;
+  justify-items: flex-end;
+}
+
+.card_divider {
+  height: 1px;
+  align-self: stretch;
+  border-radius: 1px;
+  background: var(--Neutrals-3);
+}
+
+.card:hover {
+  animation: all 0.2s ease;
+  transform: scale(104%);
+  box-shadow: 12px 12px 6px black;
+}
