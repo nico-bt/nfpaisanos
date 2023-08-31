@@ -7,6 +7,7 @@ import rightArrow from "./icons/arrow_right.svg"
 import eth from "./icons/eth.svg"
 import { useState } from "react"
 import Countdown from "./Countdown"
+import Link from "next/link"
 
 export default function Auction({ nfts, ethPrice }: { nfts: NFPAISANO[]; ethPrice: number }) {
   const [nftsArray, setNftsArray] = useState(nfts)
@@ -14,12 +15,14 @@ export default function Auction({ nfts, ethPrice }: { nfts: NFPAISANO[]; ethPric
 
   const handleClickLeft = () => {
     if (index === 0) return
-    setIndex(index - 1)
+    new Audio("/click.mp3").play()
+    setIndex((prevIndex) => prevIndex - 1)
   }
 
   const handleClickRight = () => {
     if (index < nftsArray.length - 1) {
-      setIndex(index + 1)
+      new Audio("/click.mp3").play()
+      setIndex((prevIndex) => prevIndex + 1)
     }
   }
 
@@ -30,7 +33,7 @@ export default function Auction({ nfts, ethPrice }: { nfts: NFPAISANO[]; ethPric
       <div className={styles.description}>
         <div>
           <h2>
-            {nftsArray[index].author}
+            the creator network
             <span className={styles.registered}>®</span>
           </h2>
           <div className={styles.creator_price}>
@@ -74,8 +77,16 @@ export default function Auction({ nfts, ethPrice }: { nfts: NFPAISANO[]; ethPric
         </div>
 
         <div className={styles.btns_container}>
-          <button className="btn">Place a bid</button>
-          <button className="btn secondary">View item</button>
+          <button className="btn" onMouseEnter={() => new Audio("/slowsaber.mp3").play()}>
+            Place a bid
+          </button>
+          <Link
+            href={`/nfts/${nftsArray[index].id}`}
+            className="btn secondary"
+            onMouseEnter={() => new Audio("slowsaber.mp3").play()}
+          >
+            View item
+          </Link>
         </div>
 
         <div className={styles.arrows_container}>
