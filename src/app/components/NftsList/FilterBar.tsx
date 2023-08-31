@@ -75,6 +75,9 @@ export default function FilterBar({ setFilteredNfts, nfts }: props) {
   // Handle events
   // --------------------------------------------------
   const handleChange = (e: any) => {
+    if (e.target.name === "maxPrice") {
+      new Audio("/poing.mp3").play()
+    }
     setFilter((prev) => {
       return { ...prev, [e.target.name]: e.target.value }
     })
@@ -89,24 +92,28 @@ export default function FilterBar({ setFilteredNfts, nfts }: props) {
     <>
       <div className={styles.filterbar}>
         {/* SORT BY */}
-        <select name="sortBy" id="sortBy" onChange={handleChange}>
-          <option disabled>BY DATE</option>
-          <option value="newest" selected>
-            &emsp; Newest
-          </option>
-          <option value="oldest">&emsp; Oldest</option>
-          <option disabled>BY PRICE</option>
-          <option value="cheapest">&emsp; Cheapest</option>
-          <option value="expensive">&emsp; Expensive</option>
-          <option disabled>BY LIKES</option>
-          <option value="mostLiked">&emsp; Most liked</option>
-          <option value="leastLiked">&emsp; Least liked</option>
-        </select>
+        <label>
+          Sort by:
+          <select name="sortBy" id="sortBy" onChange={handleChange} value={filter.sortBy}>
+            <option disabled>BY DATE</option>
+            <option value="newest">&emsp; Newest</option>
+            <option value="oldest">&emsp; Oldest</option>
+            <option disabled>BY PRICE</option>
+            <option value="cheapest">&emsp; Cheapest</option>
+            <option value="expensive">&emsp; Expensive</option>
+            <option disabled>BY LIKES</option>
+            <option value="mostLiked">&emsp; Most liked</option>
+            <option value="leastLiked">&emsp; Least liked</option>
+          </select>
+        </label>
 
         {/* FILTER MAX PRICE */}
         <div style={{ width: 220 }}>
           <label htmlFor="maxPrice">
-            Max Price: <span style={{ fontSize: "1.3rem", marginLeft: 6 }}>{filter.maxPrice}</span>{" "}
+            Max Price:
+            <span style={{ fontSize: "1.3rem", marginLeft: 6, color: "whitesmoke" }}>
+              {filter.maxPrice}
+            </span>
             ETH
           </label>
           <input
@@ -127,16 +134,17 @@ export default function FilterBar({ setFilteredNfts, nfts }: props) {
         </div>
 
         {/* FILTER BY COLOR */}
-        <select name="color" id="filterByColor" onChange={handleChange}>
-          <option disabled selected>
-            COLOR
-          </option>
-          {colors.map((color) => (
-            <option key={color} value={color}>
-              &emsp;{color}
-            </option>
-          ))}
-        </select>
+        <label>
+          Filter by color:
+          <select name="color" id="filterByColor" onChange={handleChange}>
+            <option disabled>COLOR</option>
+            {colors.map((color) => (
+              <option key={color} value={color}>
+                &emsp;{color}
+              </option>
+            ))}
+          </select>
+        </label>
 
         {/* FILTER CATEGORY */}
         <div className={styles.btns_container}>
