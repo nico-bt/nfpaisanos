@@ -1,5 +1,6 @@
 import Auction from "./components/Auction/Auction"
 import NftsList from "./components/NftsList/NftsList"
+import PaisanosHero from "./components/PaisanosHero/PaisanosHero"
 
 // Get Nfts function
 // ----------------------------------------------------------------------------
@@ -42,6 +43,8 @@ export default async function Home() {
       <Auction nfts={popularNfts} ethPrice={Number(prices.usd.replace(",", ""))} />
 
       <NftsList nfts={allNfts} />
+
+      <PaisanosHero />
     </>
   )
 }

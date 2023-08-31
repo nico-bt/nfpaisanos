@@ -2,6 +2,7 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { DM_Sans, Poppins } from "next/font/google"
 import Navbar from "./components/Navbar/Navbar"
+import Footer from "./components/Footer/Footer"
 
 const dm_sans = DM_Sans({ subsets: ["latin"] })
 export const poppins = Poppins({
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${dm_sans.className} ${poppins.variable} `}>
         <Navbar />
         <main className="main">{children}</main>
+        <Footer />
       </body>
     </html>
   )
