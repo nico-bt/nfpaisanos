@@ -22,6 +22,7 @@
 .navbar h1 {
   color: var(--Neutrals-7);
 }
+
 .navbar ul {
   color: var(--Neutrals-4);
 }
@@ -31,4 +32,45 @@
   height: 40px;
   border-radius: 2px;
   background-color: var(--Neutrals-3);
+}
+
+div.burger {
+  display: none;
+}
+.burger svg,
+.burger li {
+  cursor: pointer;
+}
+.burger li:hover {
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+
+.burger_menu {
+  display: grid;
+  padding: 2.5rem;
+  gap: 2.25rem;
+  justify-content: flex-start;
+  align-content: center;
+  position: absolute;
+  top: 60px;
+  right: 16px;
+  background-color: black;
+  width: 285px;
+  height: 300px;
+  border-radius: 1rem;
+}
+
+@media (max-width: 626px) {
+  .navbar .divider,
+  .navbar ul,
+  .navbar button {
+    display: none;
+  }
+
+  .navbar .burger,
+  .navbar.burguer.burger_menu button.btn {
+    display: block;
+  }
 }

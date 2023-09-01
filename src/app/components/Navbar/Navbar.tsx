@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Logo from "./Logo"
 import styles from "./styles.module.css"
+import Burger from "./Burger"
 
 export default function Navbar() {
   return (
@@ -19,6 +20,8 @@ export default function Navbar() {
         </ul>
       </div>
       <button className="btn secondary">Connect Wallet</button>
+
+      <Burger />
     </nav>
   )
 }
