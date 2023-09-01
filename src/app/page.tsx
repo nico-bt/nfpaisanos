@@ -9,6 +9,7 @@ const getNfts = async (category: string): Promise<NFPAISANO[]> => {
     headers: {
       apiKey: process.env.API_KEY as string,
     },
+    next: { revalidate: 10 },
   })
 
   if (!res.ok) {
@@ -23,10 +24,10 @@ const getNfts = async (category: string): Promise<NFPAISANO[]> => {
 const getEthPrice = async (): Promise<{ eth: string; usd: string }> => {
   const res = await fetch(`${process.env.BASE_URL}/nfpaisanos/eth-price`, {
     method: "GET",
-    // mode: "no-cors",
     headers: {
       apiKey: process.env.API_KEY as string,
     },
+    next: { revalidate: 10 },
   })
   return res.json()
 }
