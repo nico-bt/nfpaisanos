@@ -18,19 +18,19 @@
   width: 100%;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 840px) {
   .auction_container {
     grid-template-columns: 1fr;
     justify-items: center;
     gap: 2px;
   }
   .auction_container > img {
-    max-height: 581px;
+    max-width: 460px;
   }
 }
 
 .description {
-  width: 352px;
+  max-width: 352px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -61,6 +61,15 @@
   gap: 6px;
   justify-content: space-between;
 }
+@media (max-width: 400px) {
+  .description h2 {
+    font-size: 48px;
+  }
+  .creator_price {
+    grid-template-columns: 1fr;
+  }
+}
+
 .creator_price > div {
   display: flex;
   gap: 4px;
