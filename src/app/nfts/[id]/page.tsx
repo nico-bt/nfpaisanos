@@ -1,7 +1,5 @@
-import Link from "next/link"
-import arrowBack from "./arrow_back.svg"
-import Image from "next/image"
 import styles from "./styles.module.css"
+import GetBack from "./GetBack"
 
 const getNftById = async (id: string): Promise<NFPAISANO> => {
   const res = await fetch(`${process.env.BASE_URL}/nfpaisanos/aunctions`, {
@@ -40,7 +38,6 @@ export default async function page({ params }: { params: { id: string } }) {
             Stock: <span className={styles.biggerFont}>{nft.stock}</span>
           </p>
           <p className={styles.price}>{nft.instantPrice}</p>
-          <p className={styles.biggerFont}>❤️ {nft.likes}</p>
 
           <p>
             Highest bid
@@ -59,15 +56,7 @@ export default async function page({ params }: { params: { id: string } }) {
 
           <p className={styles.type}>{nft.attributes.type}</p>
 
-          <Link href="/" style={{ justifySelf: "flex-end", marginTop: 40 }}>
-            <Image
-              style={{ fill: "whitesmoke", background: "none" }}
-              src={arrowBack}
-              height={24}
-              width={24}
-              alt="back arrrow"
-            />
-          </Link>
+          <GetBack />
         </div>
       </article>
     </div>
