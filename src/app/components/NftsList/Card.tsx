@@ -11,7 +11,7 @@ interface props {
 
 export function Card({ item, setFilteredNfts }: props) {
   const { userLikes, setUserLikes } = useContext(UserContext)
-  console.log(userLikes)
+
   const [animateHeart, setAnimateHeart] = useState(false)
 
   const handleClickHeart = () => {
