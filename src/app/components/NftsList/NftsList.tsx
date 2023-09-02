@@ -1,11 +1,22 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import FilterBar from "./FilterBar"
 import styles from "./styles.module.css"
 import { Card } from "./Card"
+import { UserContext } from "@/app/context/UserContext"
 
 export default function NftsList({ nfts }: { nfts: NFPAISANO[] }) {
-  const [filteredNfts, setFilteredNfts] = useState(nfts)
+  const { userLikes } = useContext(UserContext)
+
+  const [nftsWithUserLikesAdded, setNftsWithUserLikesAdded] = useState(nfts)
+
+  const [filteredNfts, setFilteredNfts] = useState(nftsWithUserLikesAdded)
+
+  useEffect(() => {
+    setNftsWithUserLikesAdded(
+      nfts.map((nft) => (userLikes.includes(nft.id) ? { ...nft, likes: nft.likes + 1 } : nft))
+    )
+  }, [userLikes])
 
   useEffect(() => {
     if (filteredNfts.length == 0) {
@@ -15,7 +26,7 @@ export default function NftsList({ nfts }: { nfts: NFPAISANO[] }) {
 
   return (
     <>
-      <FilterBar setFilteredNfts={setFilteredNfts} nfts={nfts} />
+      <FilterBar setFilteredNfts={setFilteredNfts} nfts={nftsWithUserLikesAdded} />
 
       <section className={styles.nfts_container}>
         {filteredNfts.length > 0 ? (

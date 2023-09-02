@@ -1,6 +1,8 @@
 "use client"
+import { UserContext } from "@/app/context/UserContext"
 import styles from "./styles.module.css"
-import { Dispatch, SetStateAction, useState, ChangeEvent, useEffect } from "react"
+import { Dispatch, SetStateAction, useState, ChangeEvent, useEffect, useContext } from "react"
+import ResetFiltersIcon from "./ResetFiltersIcon"
 
 interface props {
   setFilteredNfts: Dispatch<SetStateAction<NFPAISANO[]>>
@@ -14,12 +16,14 @@ export default function FilterBar({ setFilteredNfts, nfts }: props) {
   const colors = ["All", ...Array.from(new Set(nfts.map((item) => item.attributes.color)))]
   const categories = ["All", ...Array.from(new Set(nfts.map((item) => item.type)))]
 
-  const [filter, setFilter] = useState({
-    category: "All",
-    sortBy: "newest",
-    maxPrice: nftMaxPrice,
-    color: "All",
-  })
+  const { filter, setFilter } = useContext(UserContext)
+
+  // Para la primera carga dónde el context no sabe cuál es el maxprice
+  if (filter.maxPrice == Infinity) {
+    setFilter((prev) => {
+      return { ...prev, maxPrice: nftMaxPrice }
+    })
+  }
 
   const sortAndFilter = () => {
     // Sort by date or by price or by liked
@@ -86,7 +90,7 @@ export default function FilterBar({ setFilteredNfts, nfts }: props) {
   //Cada vez que cambia filter => sortAndFilter. Los filter son acumulativos
   useEffect(() => {
     sortAndFilter()
-  }, [filter])
+  }, [filter, nfts])
 
   return (
     <>
@@ -136,7 +140,7 @@ export default function FilterBar({ setFilteredNfts, nfts }: props) {
         {/* FILTER BY COLOR */}
         <label>
           Filter by color:
-          <select name="color" id="filterByColor" onChange={handleChange}>
+          <select name="color" id="filterByColor" onChange={handleChange} value={filter.color}>
             <option disabled>COLOR</option>
             {colors.map((color) => (
               <option key={color} value={color}>
@@ -160,6 +164,15 @@ export default function FilterBar({ setFilteredNfts, nfts }: props) {
             </button>
           ))}
         </div>
+      </div>
+
+      <div
+        className={styles.resetFilters}
+        onClick={() =>
+          setFilter({ category: "All", sortBy: "newest", maxPrice: nftMaxPrice, color: "All" })
+        }
+      >
+        <ResetFiltersIcon /> Reset all filters
       </div>
     </>
   )

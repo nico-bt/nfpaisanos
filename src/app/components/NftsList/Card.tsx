@@ -1,7 +1,8 @@
 "use client"
-import { useState, Dispatch, SetStateAction } from "react"
+import { useState, Dispatch, SetStateAction, useContext } from "react"
 import Link from "next/link"
 import styles from "./styles.module.css"
+import { UserContext } from "@/app/context/UserContext"
 
 interface props {
   item: NFPAISANO
@@ -9,12 +10,21 @@ interface props {
 }
 
 export function Card({ item, setFilteredNfts }: props) {
-  const [liked, setLiked] = useState(false)
+  const { userLikes, setUserLikes } = useContext(UserContext)
+  console.log(userLikes)
   const [animateHeart, setAnimateHeart] = useState(false)
 
   const handleClickHeart = () => {
     new Audio("/heart.mp3").play()
-    setLiked((prev) => !prev)
+    // Si no está likeado lo agrego, si está likeado lo saco del context
+    setUserLikes((prev) => {
+      if (prev.includes(item.id)) {
+        return prev.filter((id) => id !== item.id)
+      } else {
+        return [...prev, item.id]
+      }
+    })
+
     setAnimateHeart(true)
     setTimeout(() => setAnimateHeart(false), 300)
   }
@@ -27,7 +37,7 @@ export function Card({ item, setFilteredNfts }: props) {
           <p>
             <span className={styles.type}>{item.attributes.type}</span>
             <span className={styles.heart} onClick={handleClickHeart}>
-              {liked ? "❤️" : "🤍"}
+              {userLikes.includes(item.id) ? "❤️" : "🤍"}
             </span>
           </p>
           <Link href={`/nfts/${item.id}`} className="btn primary">
@@ -53,13 +63,13 @@ export function Card({ item, setFilteredNfts }: props) {
         </div>
 
         <div className={styles.card_small_content}>
-          {animateHeart && liked ? (
+          {animateHeart ? (
             <>
-              <p style={{ position: "absolute", fontSize: 22 }}>❤️ {item.likes + +liked}</p>
+              <p style={{ position: "absolute", fontSize: 22 }}>❤️ {item.likes}</p>
               <span> </span>
             </>
           ) : (
-            <p>❤️ {item.likes + +liked}</p>
+            <p>❤️ {item.likes}</p>
           )}
 
           <p>
