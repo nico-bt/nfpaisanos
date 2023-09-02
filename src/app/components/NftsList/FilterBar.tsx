@@ -1,7 +1,7 @@
 "use client"
 import { UserContext } from "@/app/context/UserContext"
 import styles from "./styles.module.css"
-import { Dispatch, SetStateAction, useState, ChangeEvent, useEffect, useContext } from "react"
+import { Dispatch, SetStateAction, useEffect, useContext, useCallback } from "react"
 import ResetFiltersIcon from "./ResetFiltersIcon"
 
 interface props {
@@ -10,6 +10,7 @@ interface props {
 }
 
 export default function FilterBar({ setFilteredNfts, nfts }: props) {
+  // Extract info from nfts array
   const nftMaxPrice = Math.max(...nfts.map((item) => Number(item.instantPrice.split(" ")[0])))
   const nftMinPrice = Math.min(...nfts.map((item) => Number(item.instantPrice.split(" ")[0])))
 
@@ -18,14 +19,16 @@ export default function FilterBar({ setFilteredNfts, nfts }: props) {
 
   const { filter, setFilter } = useContext(UserContext)
 
-  // Para la primera carga dónde el context no sabe cuál es el maxprice
-  if (filter.maxPrice == Infinity) {
-    setFilter((prev) => {
-      return { ...prev, maxPrice: nftMaxPrice }
-    })
-  }
+  useEffect(() => {
+    // Para la primera carga donde el context no sabe cuál es el maxprice o si cambia el nfts[]maxprice
+    if (filter.maxPrice == Infinity) {
+      setFilter((prev) => {
+        return { ...prev, maxPrice: nftMaxPrice }
+      })
+    }
+  }, [filter, nftMaxPrice, setFilter])
 
-  const sortAndFilter = () => {
+  const sortAndFilter = useCallback(() => {
     // Sort by date or by price or by liked
     //---------------------------------------
     if (filter.sortBy === "newest") {
@@ -74,7 +77,7 @@ export default function FilterBar({ setFilteredNfts, nfts }: props) {
       return
     }
     setFilteredNfts((prev) => prev.filter((item) => item.type === filter.category))
-  }
+  }, [nfts, filter, setFilteredNfts])
 
   // Handle events
   // --------------------------------------------------
@@ -90,7 +93,7 @@ export default function FilterBar({ setFilteredNfts, nfts }: props) {
   //Cada vez que cambia filter => sortAndFilter. Los filter son acumulativos
   useEffect(() => {
     sortAndFilter()
-  }, [filter, nfts])
+  }, [filter, nfts, sortAndFilter])
 
   return (
     <>
@@ -116,9 +119,8 @@ export default function FilterBar({ setFilteredNfts, nfts }: props) {
           <label htmlFor="maxPrice">
             Max Price:
             <span style={{ fontSize: "1.3rem", marginLeft: 6, color: "whitesmoke" }}>
-              {filter.maxPrice}
+              {filter.maxPrice} ETH
             </span>
-            ETH
           </label>
           <input
             id="maxPrice"
