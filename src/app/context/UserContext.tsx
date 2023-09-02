@@ -1,5 +1,5 @@
 "use client"
-import { createContext, useEffect, useState, Dispatch, SetStateAction } from "react"
+import { createContext, useState, Dispatch, SetStateAction } from "react"
 
 interface filterType {
   category: string
