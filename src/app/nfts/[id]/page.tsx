@@ -1,6 +1,7 @@
 import styles from "./styles.module.css"
 import GetBack from "./GetBack"
 import Image from "next/image"
+import { notFound } from "next/navigation"
 
 const getNftById = async (id: string): Promise<NFPAISANO> => {
   const res = await fetch(`${process.env.BASE_URL}/nfpaisanos/aunctions`, {
@@ -16,6 +17,9 @@ const getNftById = async (id: string): Promise<NFPAISANO> => {
 
   const nfts = await res.json()
   const nft = nfts.find((item: NFPAISANO) => item.id === +id)
+  if (!nft) {
+    return notFound()
+  }
   return nft
 }
 
@@ -31,7 +35,6 @@ export default async function page({ params }: { params: { id: string } }) {
           height={1333}
           width={1000}
           sizes="(max-width: 649px) 100vw, (max-width: 1150px) 67vw, 50vw"
-          objectFit="contain"
           priority={true}
         />
 

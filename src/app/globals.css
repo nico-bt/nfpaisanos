@@ -109,3 +109,10 @@ footer a {
     display: block;
   }
 }
+
+.error_page {
+  display: grid;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 6rem;
+}
