@@ -38,7 +38,6 @@ export function Card({ item, setFilteredNfts }: props) {
           height={1333}
           width={1000}
           alt="imagen nft"
-          objectFit="cover"
           sizes="(max-width: 559px) 100vw, (max-width: 831px) 50vw, (max-width: 1103px) 33vw, 260px"
         />
         <div className={styles.img_overlay}>
