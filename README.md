@@ -25,7 +25,7 @@
 
 
 #### 🏆 The Manija Trophies 🏆
-- Add new features to the challenge!
+- ✔️ Add new features to the challenge!
   - Podés dar likes al hacer click en ❤️/🤍
   - Cada item tiene su details page --> nfts/[id]
   - Los filtros seleccionados y los likes se mantienen entre routes
