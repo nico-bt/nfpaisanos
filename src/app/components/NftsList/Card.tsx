@@ -3,6 +3,7 @@ import { useState, Dispatch, SetStateAction, useContext } from "react"
 import Link from "next/link"
 import styles from "./styles.module.css"
 import { UserContext } from "@/app/context/UserContext"
+import Image from "next/image"
 
 interface props {
   item: NFPAISANO
@@ -32,7 +33,14 @@ export function Card({ item, setFilteredNfts }: props) {
   return (
     <article className={styles.card}>
       <div className={styles.card_img_container}>
-        <img src={item.media.image} alt="imagen nft" />
+        <Image
+          src={item.media.image}
+          height={1333}
+          width={1000}
+          alt="imagen nft"
+          objectFit="cover"
+          sizes="(max-width: 559px) 100vw, (max-width: 831px) 50vw, (max-width: 1103px) 33vw, 260px"
+        />
         <div className={styles.img_overlay}>
           <p>
             <span className={styles.type}>{item.attributes.type}</span>
@@ -55,7 +63,7 @@ export function Card({ item, setFilteredNfts }: props) {
         <div>
           <div>
             {item.bidUsers.slice(0, 6).map((user) => (
-              <img key={user.id} src={user.avatar} alt="user bid avatar" height={24} width={24} />
+              <Image key={user.id} src={user.avatar} alt="user bid avatar" height={24} width={24} />
             ))}
             {item.bidUsers.length > 6 && " . . ."}
           </div>

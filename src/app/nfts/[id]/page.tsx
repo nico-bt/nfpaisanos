@@ -1,5 +1,6 @@
 import styles from "./styles.module.css"
 import GetBack from "./GetBack"
+import Image from "next/image"
 
 const getNftById = async (id: string): Promise<NFPAISANO> => {
   const res = await fetch(`${process.env.BASE_URL}/nfpaisanos/aunctions`, {
@@ -24,10 +25,20 @@ export default async function page({ params }: { params: { id: string } }) {
   return (
     <div className={styles.grid}>
       <article>
-        <img src={nft.media.image} alt="imagen nft" style={{ maxHeight: "90vh" }} />
+        <Image
+          src={nft.media.image}
+          alt="imagen nft"
+          height={1333}
+          width={1000}
+          sizes="(max-width: 649px) 100vw, (max-width: 1150px) 67vw, 50vw"
+          objectFit="contain"
+          priority={true}
+        />
 
         <div className={styles.body}>
-          <img
+          <Image
+            height={60}
+            width={60}
             src={nft.authorAvatar}
             alt="author avatar"
             className="avatar"

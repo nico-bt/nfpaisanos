@@ -17,6 +17,12 @@
   }
 }
 
+.grid article img {
+  max-height: 90vh;
+  object-fit: contain;
+  background: none;
+}
+
 .body {
   display: grid;
   gap: 1rem;

@@ -28,7 +28,14 @@ export default function Auction({ nfts, ethPrice }: { nfts: NFPAISANO[]; ethPric
 
   return (
     <section className={styles.auction_container}>
-      <img src={nftsArray[index].media.image} alt="nft image" />
+      <Image
+        src={nftsArray[index].media.image}
+        alt="nft image"
+        height={1333}
+        width={1000}
+        sizes="(max-width: 840px) 100vw, 50vw"
+        priority={true}
+      />
 
       <div className={styles.description}>
         <div>
@@ -38,7 +45,13 @@ export default function Auction({ nfts, ethPrice }: { nfts: NFPAISANO[]; ethPric
           </h2>
           <div className={styles.creator_price}>
             <div>
-              <img className="avatar" alt="creator avatar" src={nftsArray[index].authorAvatar} />
+              <Image
+                className="avatar"
+                alt="creator avatar"
+                src={nftsArray[index].authorAvatar}
+                height={40}
+                width={40}
+              />
               <div>
                 <h3>Creator</h3>
                 <p>{nftsArray[index].author}</p>
