@@ -18,65 +18,66 @@ export default function FilterBar({ setFilteredNfts, nfts }: props) {
   const categories = ["All", ...Array.from(new Set(nfts.map((item) => item.type)))]
 
   const { filter, setFilter } = useContext(UserContext)
-
   useEffect(() => {
-    // Para la primera carga donde el context no sabe cuál es el maxprice o si cambia el nfts[]maxprice
+    // Para la primera carga donde el context no sabe cuál es el maxprice
     if (filter.maxPrice == Infinity) {
       setFilter((prev) => {
         return { ...prev, maxPrice: nftMaxPrice }
       })
     }
-  }, [filter, nftMaxPrice, setFilter])
+  }, [filter.maxPrice, setFilter, nftMaxPrice])
 
   const sortAndFilter = useCallback(() => {
+    let localFilteredNfts = [...nfts]
+
     // Sort by date or by price or by liked
     //---------------------------------------
     if (filter.sortBy === "newest") {
-      setFilteredNfts(
-        [...nfts].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      localFilteredNfts.sort(
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       )
     }
-
     if (filter.sortBy === "oldest") {
-      setFilteredNfts(
-        [...nfts].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+      localFilteredNfts.sort(
+        (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
       )
     }
     if (filter.sortBy === "cheapest") {
-      setFilteredNfts(
-        [...nfts].sort((a, b) => +a.instantPrice.split(" ")[0] - +b.instantPrice.split(" ")[0])
+      localFilteredNfts.sort(
+        (a, b) => +a.instantPrice.split(" ")[0] - +b.instantPrice.split(" ")[0]
       )
     }
     if (filter.sortBy === "expensive") {
-      setFilteredNfts(
-        [...nfts].sort((a, b) => +b.instantPrice.split(" ")[0] - +a.instantPrice.split(" ")[0])
+      localFilteredNfts.sort(
+        (a, b) => +b.instantPrice.split(" ")[0] - +a.instantPrice.split(" ")[0]
       )
     }
     if (filter.sortBy === "mostLiked") {
-      setFilteredNfts([...nfts].sort((a, b) => +b.likes - +a.likes))
+      localFilteredNfts.sort((a, b) => +b.likes - +a.likes)
     }
     if (filter.sortBy === "leastLiked") {
-      setFilteredNfts([...nfts].sort((a, b) => +a.likes - +b.likes))
+      localFilteredNfts.sort((a, b) => +a.likes - +b.likes)
     }
 
     // Filter by maximum price
     //----------------------------
-    setFilteredNfts((prev) =>
-      prev.filter((item) => +item.instantPrice.split(" ")[0] <= +filter.maxPrice)
+    localFilteredNfts = localFilteredNfts.filter(
+      (item) => +item.instantPrice.split(" ")[0] <= +filter.maxPrice
     )
 
     // Filter by color
     //----------------------------
     if (filter.color !== "All") {
-      setFilteredNfts((prev) => prev.filter((item) => item.attributes.color === filter.color))
+      localFilteredNfts = localFilteredNfts.filter((item) => item.attributes.color === filter.color)
     }
 
     // Filter by category
     //------------------------
-    if (filter.category === "All") {
-      return
+    if (filter.category !== "All") {
+      localFilteredNfts = localFilteredNfts.filter((item) => item.type === filter.category)
     }
-    setFilteredNfts((prev) => prev.filter((item) => item.type === filter.category))
+
+    setFilteredNfts(localFilteredNfts)
   }, [nfts, filter, setFilteredNfts])
 
   // Handle events
