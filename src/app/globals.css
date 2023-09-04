@@ -31,6 +31,9 @@ body {
 body {
   color: whitesmoke;
   background: var(--Neutrals-1);
+  min-height: 100vh;
+  display: grid;
+  align-content: space-between;
 }
 a {
   color: inherit;
@@ -86,7 +89,7 @@ li {
 
 .main {
   padding: 1rem;
-  min-height: 100vh;
+  width: 100%;
   max-width: 1120px;
   margin: 0 auto;
 }
@@ -114,5 +117,4 @@ footer a {
   display: grid;
   justify-content: center;
   gap: 1.25rem;
-  margin-top: 6rem;
 }
