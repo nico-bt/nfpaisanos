@@ -16,7 +16,7 @@ export default function NftsList({ nfts }: { nfts: NFPAISANO[] }) {
     setNftsWithUserLikesAdded(
       nfts.map((nft) => (userLikes.includes(nft.id) ? { ...nft, likes: nft.likes + 1 } : nft))
     )
-  }, [userLikes])
+  }, [userLikes, nfts])
 
   useEffect(() => {
     if (filteredNfts.length == 0) {
