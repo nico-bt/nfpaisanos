@@ -1,6 +1,6 @@
 # NFPaisanos | NFT Marketplace
 
-### 💻Live: https://nfpaisanos-nico-bt.vercel.app/
+### 💻Live: https://nfpaisanos-pi.vercel.app/
 
 ### Techs usadas:
 - Nextjs
