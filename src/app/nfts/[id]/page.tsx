@@ -3,28 +3,40 @@ import GetBack from "./GetBack"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 
-const getNftById = async (id: string): Promise<NFPAISANO> => {
-  const res = await fetch(`${process.env.BASE_URL}/nfpaisanos/aunctions`, {
-    headers: {
-      apiKey: process.env.API_KEY as string,
-    },
-    next: { revalidate: 10 },
+//La API dejó de funcionar, temporary mock data
+import allNfts from "@/app/mockData/allNfts.json"
+
+const getNftById = (id: string): NFPAISANO => {
+  // const res = await fetch(`${process.env.BASE_URL}/nfpaisanos/aunctions`, {
+  //   headers: {
+  //     apiKey: process.env.API_KEY as string,
+  //   },
+  //   next: { revalidate: 10 },
+  // })
+
+  // if (!res.ok) {
+  //   throw new Error("Ups... Wrong response. Please try again")
+  // }
+
+  // const nfts = await res.json()
+
+  const nfts = allNfts.map((item) => {
+    return {
+      ...item,
+      createdAt: new Date(item.createdAt),
+      endsAt: new Date(item.endsAt),
+    }
   })
 
-  if (!res.ok) {
-    throw new Error("Ups... Wrong response. Please try again")
-  }
-
-  const nfts = await res.json()
-  const nft = nfts.find((item: NFPAISANO) => item.id === +id)
+  const nft = nfts.find((item) => item.id === +id)
   if (!nft) {
     return notFound()
   }
-  return nft
+  return nft as NFPAISANO
 }
 
-export default async function page({ params }: { params: { id: string } }) {
-  const nft = await getNftById(params.id)
+export default function page({ params }: { params: { id: string } }) {
+  const nft = getNftById(params.id)
 
   return (
     <div className={styles.grid}>
