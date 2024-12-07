@@ -8,7 +8,7 @@ const useCountdown = (targetDate: Date) => {
   // Si no cuenta respecto al pasado y va aumentando:
   //----------------------------------------------------------------------------
   //   const countDownDate = new Date(targetDate).getTime() //Esta línea iría con una fecha en el futuro
-  const countDownDate = new Date("2024-12-06T06:42:33.000Z").getTime()
+  const countDownDate = new Date("2025-12-06T06:42:33.000Z").getTime()
 
   const [countDown, setCountDown] = useState(countDownDate - new Date().getTime())
 
